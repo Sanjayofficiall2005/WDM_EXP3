@@ -1,5 +1,5 @@
 ### EX3 Implementation of GSP Algorithm In Python
-### DATE: 
+### DATE: 22/5/2026
 ### AIM: To implement GSP Algorithm In Python.
 ### Description:
 The Generalized Sequential Pattern (GSP) algorithm is a data mining technique used for discovering frequent patterns within a sequence database. It operates by identifying sequences that frequently occur together. GSP works by employing a depth-first search strategy to explore and extract frequent patterns efficiently.
@@ -36,23 +36,34 @@ for each wear category.</p>
 <p align="justify">
 8. Visulaize the sequence patterns using matplotlib.
 </p>
+
 ### Program:
 
 ```python
 from collections import defaultdict
 from itertools import combinations
 # Function to generate candidate k-item sequences
-def generate_candidates(dataset, k):
-
-
-    /WRITE YOUR CODE HERE/
+def generate_candidates(dataset,k):
+    c = defaultdict(int)
+    for seq in dataset:
+        for com in combinations(seq,k):
+            c[com] += 1
+    for item,sup in c.items():
+        if sup>= min_support:
+            return {item:sup}
 
 
 #Function to perform GSP algorithm
-def gsp(dataset, min_support):
-
-
-  /WRITE YOUR CODE HERE/
+def gsp(dataset,min_support):
+    fp = defaultdict(int)
+    k=1
+    while True:
+        c = generate_candidates(dataset,k)
+        if not c:
+            break
+        k+=1
+        fp.update(c)
+    return fp
 
 
 #Example dataset for each category
@@ -130,6 +141,11 @@ visualize_patterns_line(bottom_wear_result, 'Bottom Wear')
 visualize_patterns_line(party_wear_result, 'Party Wear')
 ```
 ### Output:
+<img width="695" height="293" alt="image" src="https://github.com/user-attachments/assets/c5ff2ebb-d1cd-4b11-8121-b7de21f7a7eb" />
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/1dfd4496-d761-43d8-8949-2247a3f1fd66" />
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/90635b85-f3d7-48c7-b10e-ee64cd241ba9" />
+
 
 
 ### Result:
+Thus the implementation of the GSP algorithm in python has been successfully executed.
